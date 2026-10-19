@@ -126,7 +126,7 @@
       font-size: 0.8rem;
       font-weight: 600;
       border: 1px solid var(--outline-variant);
-      max-width: 180px;
+      max-width: 190px;
     }
 
     .user-pill span#userEmailLabel {
@@ -213,10 +213,10 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      min-height: 46px;
-      padding: 10px 20px;
-      font-size: 0.9rem;
+      gap: 6px;
+      min-height: 44px;
+      padding: 8px 18px;
+      font-size: 0.88rem;
       font-weight: 700;
       border-radius: var(--radius-full);
       border: none;
@@ -252,6 +252,23 @@
       background: transparent;
       border: 1.5px solid var(--outline);
       color: var(--on-background);
+    }
+
+    .btn-danger {
+      background: var(--error);
+      color: #FFFFFF;
+    }
+
+    .btn-danger-tonal {
+      background: var(--error-container);
+      color: var(--error);
+    }
+
+    .btn-sm {
+      min-height: 32px;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      border-radius: var(--radius-sm);
     }
 
     .btn-block {
@@ -325,7 +342,7 @@
       border-collapse: collapse;
       text-align: left;
       font-size: 0.88rem;
-      min-width: 580px;
+      min-width: 650px;
     }
 
     th {
@@ -411,9 +428,7 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* ======================================================== */
-    /* RESPONSIVE BREAKPOINTS (Mobile & Tablets) */
-    /* ======================================================== */
+    /* Responsive Breakpoints */
     @media (max-width: 768px) {
       .metrics-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -479,7 +494,6 @@
   <!-- Medical App Header -->
   <header>
     <div class="brand">
-      <!-- Medical Cross / Services Logo -->
       <div class="brand-icon">
         <span class="material-symbols-outlined" style="font-size: 24px;">medical_services</span>
       </div>
@@ -526,7 +540,116 @@
       </form>
     </div>
 
-    <!-- 2. STAFF ATTENDANCE & LEAVE SECTION -->
+    <!-- 2. ADMIN MASTER DASHBOARD -->
+    <div id="adminSection" class="hidden">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <h1 style="font-size: 1.4rem; font-weight: 800;">Admin Master Portal</h1>
+          <div style="font-size: 0.82rem; color: var(--secondary);">Life Gas System - Master Register</div>
+        </div>
+        <div class="admin-actions" style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button id="exportDayCsvBtn" class="btn btn-tonal" style="font-size: 0.85rem;">
+            <span class="material-symbols-outlined" style="font-size:18px;">file_download</span> Day's CSV
+          </button>
+          <button id="exportAllCsvBtn" class="btn btn-primary" style="font-size: 0.85rem;">
+            <span class="material-symbols-outlined" style="font-size:18px;">download</span> Full CSV
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Date Selector -->
+      <div class="card" style="padding: 14px; margin-bottom: 16px;">
+        <div class="filter-bar">
+          <div style="display: flex; gap: 8px;">
+            <button id="quickTodayBtn" class="btn btn-tonal" style="padding: 6px 14px; font-size: 0.82rem; min-height: 38px;">Today</button>
+            <button id="quickYesterdayBtn" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.82rem; min-height: 38px;">Yesterday</button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-left: auto;">
+            <label for="adminDateInput" style="font-size: 0.8rem; font-weight: 700; white-space: nowrap;">Date:</label>
+            <input type="date" id="adminDateInput" class="form-control" style="width: auto; min-height: 38px; padding: 6px 10px;" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Metrics -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-label">Total Logged</div>
+          <div class="metric-val" id="metricTotal">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Present</div>
+          <div class="metric-val" id="metricPresent" style="color: var(--primary);">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Full Absent</div>
+          <div class="metric-val" id="metricAbsent" style="color: var(--error);">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Half / Custom</div>
+          <div class="metric-val" id="metricLeave" style="color: var(--warning);">0</div>
+        </div>
+      </div>
+
+      <!-- ADMIN MANUAL OVERRIDE / ADD ATTENDANCE FORM -->
+      <div class="card" style="border: 1.5px solid var(--primary); background: #FCFDFC;">
+        <h2 class="card-title" style="color: var(--primary); display: flex; align-items: center; gap: 6px;">
+          <span class="material-symbols-outlined">edit_calendar</span> Admin: Force Update / Mark Staff Attendance
+        </h2>
+        <p class="card-subtitle">Mark any employee as Present or Absent directly.</p>
+
+        <form id="adminManualForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="adminStaffEmail">Staff Email Address</label>
+              <input type="email" id="adminStaffEmail" class="form-control" placeholder="e.g. staff@lgs.co.in" required />
+            </div>
+            <div class="form-group">
+              <label for="adminManualDate">Target Date</label>
+              <input type="date" id="adminManualDate" class="form-control" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="adminManualRemark">Remarks / Reason (Optional)</label>
+            <input type="text" id="adminManualRemark" class="form-control" placeholder="e.g. Marked Present by Admin / On Duty" />
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button type="button" id="adminForcePresentBtn" class="btn btn-primary" style="flex: 1;">
+              <span class="material-symbols-outlined">check_circle</span> Set As Present
+            </button>
+            <button type="button" id="adminForceAbsentBtn" class="btn btn-danger" style="flex: 1;">
+              <span class="material-symbols-outlined">cancel</span> Set As Absent
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Register Table -->
+      <div class="card">
+        <h2 class="card-title" id="adminTableHeading">Daily Register</h2>
+        <p class="card-subtitle">Use the action buttons to toggle Present or Absent for any employee row.</p>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Staff Email</th>
+                <th>Status</th>
+                <th>Detail / Hours</th>
+                <th>Reason</th>
+                <th>Submitted</th>
+                <th style="text-align: center;">Quick Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminRegisterBody">
+              <tr><td colspan="6" style="text-align:center; padding: 20px;">Loading register...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. STAFF ATTENDANCE & LEAVE SECTION -->
     <div id="staffSection" class="hidden">
       <!-- Live Clock Banner -->
       <div class="clock-banner">
@@ -619,7 +742,7 @@
       <!-- Recent Logs Table -->
       <div class="card">
         <h2 class="card-title">My Recent Submissions</h2>
-        <p class="card-subtitle">Scroll horizontally on mobile to view timing details.</p>
+        <p class="card-subtitle">Scroll horizontally on mobile screens to inspect full logs.</p>
         <div class="table-container">
           <table>
             <thead>
@@ -638,81 +761,6 @@
         </div>
       </div>
     </div>
-
-    <!-- 3. ADMIN MASTER DASHBOARD -->
-    <div id="adminSection" class="hidden">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
-        <div>
-          <h1 style="font-size: 1.4rem; font-weight: 800;">Admin Master Portal</h1>
-          <div style="font-size: 0.82rem; color: var(--secondary);">Life Gas System - Master Register</div>
-        </div>
-        <div class="admin-actions" style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <button id="exportDayCsvBtn" class="btn btn-tonal" style="font-size: 0.85rem;">
-            <span class="material-symbols-outlined" style="font-size:18px;">file_download</span> Day's CSV
-          </button>
-          <button id="exportAllCsvBtn" class="btn btn-primary" style="font-size: 0.85rem;">
-            <span class="material-symbols-outlined" style="font-size:18px;">download</span> Full CSV
-          </button>
-        </div>
-      </div>
-
-      <!-- Quick Date Selector -->
-      <div class="card" style="padding: 14px; margin-bottom: 16px;">
-        <div class="filter-bar">
-          <div style="display: flex; gap: 8px;">
-            <button id="quickTodayBtn" class="btn btn-tonal" style="padding: 6px 14px; font-size: 0.82rem; min-height: 38px;">Today</button>
-            <button id="quickYesterdayBtn" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.82rem; min-height: 38px;">Yesterday</button>
-          </div>
-          <div style="display: flex; align-items: center; gap: 8px; margin-left: auto;">
-            <label for="adminDateInput" style="font-size: 0.8rem; font-weight: 700; white-space: nowrap;">Date:</label>
-            <input type="date" id="adminDateInput" class="form-control" style="width: auto; min-height: 38px; padding: 6px 10px;" />
-          </div>
-        </div>
-      </div>
-
-      <!-- Metrics -->
-      <div class="metrics-grid">
-        <div class="metric-card">
-          <div class="metric-label">Total Logged</div>
-          <div class="metric-val" id="metricTotal">0</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Present</div>
-          <div class="metric-val" id="metricPresent" style="color: var(--primary);">0</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Full Absent</div>
-          <div class="metric-val" id="metricAbsent" style="color: var(--error);">0</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Half / Custom</div>
-          <div class="metric-val" id="metricLeave" style="color: var(--warning);">0</div>
-        </div>
-      </div>
-
-      <!-- Register Table -->
-      <div class="card">
-        <h2 class="card-title" id="adminTableHeading">Daily Register</h2>
-        <p class="card-subtitle">Scroll horizontally on mobile screens to inspect full logs.</p>
-
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Staff Email</th>
-                <th>Status</th>
-                <th>Detail / Hours</th>
-                <th>Reason</th>
-                <th>Submitted</th>
-              </tr>
-            </thead>
-            <tbody id="adminRegisterBody">
-              <tr><td colspan="5" style="text-align:center; padding: 20px;">Loading register...</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
   </main>
 
   <!-- Notification Toast -->
@@ -721,7 +769,7 @@
     <span id="toastMsg"></span>
   </div>
 
-  <!-- Firebase Modular SDK via ESM -->
+  <!-- Firebase Modular SDK (Singapore Region Configuration) -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { 
@@ -738,11 +786,11 @@
       update 
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-    // 1. Firebase Config
+    // 1. Firebase Config with Singapore Database URL
     const firebaseConfig = {
       apiKey: "AIzaSyApw7bBuvQBbiy1atM1oOE6X8aAZVh8IRM",
       authDomain: "mytube-f8fb5.firebaseapp.com",
-      databaseURL: "https://mytube-f8fb5-default-rtdb.firebaseio.com",
+      databaseURL: "https://mytube-f8fb5-default-rtdb.asia-southeast1.firebasedatabase.app",
       projectId: "mytube-f8fb5",
       storageBucket: "mytube-f8fb5.firebasestorage.app",
       messagingSenderId: "27336640099",
@@ -799,10 +847,16 @@
     const exportDayCsvBtn = document.getElementById("exportDayCsvBtn");
     const exportAllCsvBtn = document.getElementById("exportAllCsvBtn");
 
+    // Admin Override Form
+    const adminStaffEmail = document.getElementById("adminStaffEmail");
+    const adminManualDate = document.getElementById("adminManualDate");
+    const adminManualRemark = document.getElementById("adminManualRemark");
+    const adminForcePresentBtn = document.getElementById("adminForcePresentBtn");
+    const adminForceAbsentBtn = document.getElementById("adminForceAbsentBtn");
+
     let currentUser = null;
     let currentAdminRecords = [];
 
-    // Format Date object to YYYY-MM-DD
     function formatDateKey(dateObj) {
       const year = dateObj.getFullYear();
       const month = String(dateObj.getMonth() + 1).padStart(2, '0');
@@ -817,7 +871,6 @@
       setTimeout(() => toast.classList.remove("show"), 3500);
     }
 
-    // Helper: Dates between range
     function getDatesInRange(startDateStr, endDateStr) {
       const dates = [];
       let curr = new Date(startDateStr);
@@ -830,7 +883,6 @@
       return dates;
     }
 
-    // Live Clock
     function updateClock() {
       const now = new Date();
       liveClock.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
@@ -839,7 +891,6 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Default dates initialization
     const todayStr = formatDateKey(new Date());
     presentDate.value = todayStr;
     absentFromDate.value = todayStr;
@@ -847,8 +898,9 @@
     halfAbsentDate.value = todayStr;
     customLeaveDate.value = todayStr;
     adminDateInput.value = todayStr;
+    adminManualDate.value = todayStr;
 
-    // Attendance Type Switcher
+    // Toggle Inputs
     attendanceType.addEventListener("change", () => {
       const val = attendanceType.value;
       presentGroup.classList.add("hidden");
@@ -876,9 +928,11 @@
         authSection.classList.add("hidden");
 
         if (user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+          // Admin can see BOTH the Admin Dashboard and Staff Attendance Section
           adminSection.classList.remove("hidden");
-          staffSection.classList.add("hidden");
+          staffSection.classList.remove("hidden");
           initAdminView();
+          loadStaffHistory();
         } else {
           adminSection.classList.add("hidden");
           staffSection.classList.remove("hidden");
@@ -899,9 +953,9 @@
       const password = loginPassword.value;
       try {
         await signInWithEmailAndPassword(auth, email, password);
-        showToast("Welcome back to Life Gas System!");
+        showToast("Signed in successfully!");
       } catch (err) {
-        showToast("Error: " + err.message);
+        showToast("Login error: " + err.message);
       }
     });
 
@@ -912,7 +966,7 @@
     });
 
     // -------------------------------------------------------------
-    // STAFF SUBMISSION
+    // STAFF SUBMISSION LOGIC
     // -------------------------------------------------------------
     attendanceForm.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -1002,6 +1056,9 @@
         showToast("Record successfully submitted!");
         remarkInput.value = "";
         loadStaffHistory();
+        if (currentUser.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+          loadAdminDate(adminDateInput.value);
+        }
       } catch (err) {
         showToast("Error saving: " + err.message);
       }
@@ -1061,12 +1118,12 @@
         });
         employeeHistoryBody.innerHTML = html;
       } catch (err) {
-        employeeHistoryBody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:red;">Error loading: ${err.message}</td></tr>`;
+        employeeHistoryBody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:red;">Error: ${err.message}</td></tr>`;
       }
     }
 
     // -------------------------------------------------------------
-    // ADMIN DASHBOARD
+    // ADMIN DASHBOARD & ROW-UPDATE LOGIC
     // -------------------------------------------------------------
     function initAdminView() {
       const today = formatDateKey(new Date());
@@ -1076,6 +1133,7 @@
       quickTodayBtn.addEventListener("click", () => {
         const d = formatDateKey(new Date());
         adminDateInput.value = d;
+        adminManualDate.value = d;
         quickTodayBtn.className = "btn btn-tonal";
         quickYesterdayBtn.className = "btn btn-outline";
         loadAdminDate(d);
@@ -1086,6 +1144,7 @@
         y.setDate(y.getDate() - 1);
         const yStr = formatDateKey(y);
         adminDateInput.value = yStr;
+        adminManualDate.value = yStr;
         quickYesterdayBtn.className = "btn btn-tonal";
         quickTodayBtn.className = "btn btn-outline";
         loadAdminDate(yStr);
@@ -1094,20 +1153,21 @@
       adminDateInput.addEventListener("change", (e) => {
         quickTodayBtn.className = "btn btn-outline";
         quickYesterdayBtn.className = "btn btn-outline";
+        adminManualDate.value = e.target.value;
         loadAdminDate(e.target.value);
       });
     }
 
     async function loadAdminDate(selectedDate) {
       adminTableHeading.innerText = `Register for ${selectedDate}`;
-      adminRegisterBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px;">Loading register...</td></tr>`;
+      adminRegisterBody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 20px;">Loading register...</td></tr>`;
 
       try {
         const snap = await get(ref(db, `attendance/${selectedDate}`));
         currentAdminRecords = [];
 
         if (!snap.exists()) {
-          adminRegisterBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px;">No entries logged for this date.</td></tr>`;
+          adminRegisterBody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 20px;">No entries logged for this date.</td></tr>`;
           metricTotal.innerText = "0";
           metricPresent.innerText = "0";
           metricAbsent.innerText = "0";
@@ -1122,7 +1182,8 @@
         let countLeave = 0;
         let rows = "";
 
-        Object.values(data).forEach(entry => {
+        Object.keys(data).forEach(userKey => {
+          const entry = data[userKey];
           countTotal++;
           if (entry.status === "Present") countPresent++;
           else if (entry.status === "Full Day Absent") countAbsent++;
@@ -1137,6 +1198,14 @@
               <td>${entry.detail || '-'}</td>
               <td>${entry.remark || '-'}</td>
               <td style="color:var(--secondary); font-size:0.8rem;">${entry.submitTime || '-'}</td>
+              <td style="text-align:center; white-space:nowrap;">
+                <button class="btn btn-sm btn-tonal" onclick="window.adminSetStatus('${selectedDate}', '${userKey}', '${entry.email}', 'Present')" title="Change to Present">
+                  <span class="material-symbols-outlined" style="font-size:14px; color:green;">check</span> Present
+                </button>
+                <button class="btn btn-sm btn-danger-tonal" onclick="window.adminSetStatus('${selectedDate}', '${userKey}', '${entry.email}', 'Full Day Absent')" title="Change to Absent" style="margin-left:4px;">
+                  <span class="material-symbols-outlined" style="font-size:14px;">close</span> Absent
+                </button>
+              </td>
             </tr>
           `;
         });
@@ -1147,7 +1216,73 @@
         metricLeave.innerText = countLeave;
         adminRegisterBody.innerHTML = rows;
       } catch (err) {
-        adminRegisterBody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:red;">Error: ${err.message}</td></tr>`;
+        adminRegisterBody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:red;">Error: ${err.message}</td></tr>`;
+      }
+    }
+
+    // Window-exposed quick action for row buttons
+    window.adminSetStatus = async function(date, userKey, email, newStatus) {
+      const nowTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      try {
+        const record = {
+          email: email,
+          uid: userKey,
+          status: newStatus,
+          detail: newStatus === "Present" ? `Admin Marked Present (${nowTime})` : `Admin Marked Absent`,
+          remark: `Updated by Admin`,
+          timestamp: Date.now(),
+          submitTime: nowTime,
+          date: date
+        };
+        await set(ref(db, `attendance/${date}/${userKey}`), record);
+        showToast(`Status updated to ${newStatus} for ${email}`);
+        loadAdminDate(date);
+      } catch (err) {
+        showToast("Error updating: " + err.message);
+      }
+    };
+
+    // Admin Manual Form (Force Update Present / Absent)
+    adminForcePresentBtn.addEventListener("click", () => handleAdminManualSubmit("Present"));
+    adminForceAbsentBtn.addEventListener("click", () => handleAdminManualSubmit("Full Day Absent"));
+
+    async function handleAdminManualSubmit(forcedStatus) {
+      const email = adminStaffEmail.value.trim();
+      const targetDate = adminManualDate.value;
+      const remark = adminManualRemark.value.trim() || `Admin manual entry`;
+
+      if (!email) {
+        showToast("Please enter employee's email address.");
+        return;
+      }
+      if (!targetDate) {
+        showToast("Please select a target date.");
+        return;
+      }
+
+      // Generate consistent sanitized key if UID unknown
+      const sanitizedKey = email.toLowerCase().replace(/[^a-zA-Z0-9]/g, '_');
+      const submitTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      try {
+        const record = {
+          email: email,
+          uid: sanitizedKey,
+          status: forcedStatus,
+          detail: forcedStatus === "Present" ? `Marked Present by Admin` : `Marked Absent by Admin`,
+          remark: remark,
+          timestamp: Date.now(),
+          submitTime: submitTime,
+          date: targetDate
+        };
+
+        await set(ref(db, `attendance/${targetDate}/${sanitizedKey}`), record);
+        showToast(`Successfully marked ${forcedStatus} for ${email}!`);
+        adminStaffEmail.value = "";
+        adminManualRemark.value = "";
+        loadAdminDate(adminDateInput.value);
+      } catch (e) {
+        showToast("Error saving manual entry: " + e.message);
       }
     }
 
