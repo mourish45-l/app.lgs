@@ -2,44 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Life Gas System - Attendance Portal</title>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Life Gas System - Medical Attendance & Leave Portal</title>
+
   <!-- Google Fonts & Material Symbols -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-  <!-- M3 Expressive Green Stylesheet -->
   <style>
     :root {
-      /* M3 Expressive Green Palette */
-      --md-sys-color-primary: #006D37;
-      --md-sys-color-on-primary: #FFFFFF;
-      --md-sys-color-primary-container: #93F8AF;
-      --md-sys-color-on-primary-container: #00210C;
-      --md-sys-color-secondary: #506352;
-      --md-sys-color-secondary-container: #D3E8D3;
-      --md-sys-color-on-secondary-container: #0E1F12;
-      --md-sys-color-tertiary: #3A656F;
-      --md-sys-color-error: #BA1A1A;
-      --md-sys-color-background: #F7FBF3;
-      --md-sys-color-on-background: #181D18;
-      --md-sys-color-surface: #F7FBF3;
-      --md-sys-color-on-surface: #181D18;
-      --md-sys-color-surface-container: #ECEFE8;
-      --md-sys-color-surface-container-high: #E6EAE2;
-      --md-sys-color-outline: #717970;
-      --md-sys-color-outline-variant: #C1C9BE;
-      
-      --elevation-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.12);
-      --elevation-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.14);
-      --elevation-3: 0px 4px 8px 3px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.16);
+      /* M3 Professional Medical Green Palette */
+      --primary: #006D37;
+      --on-primary: #FFFFFF;
+      --primary-container: #A4F6B8;
+      --on-primary-container: #00210C;
+      --secondary: #506352;
+      --secondary-container: #D3E8D3;
+      --on-secondary-container: #0E1F12;
+      --surface: #FFFFFF;
+      --surface-container: #F0F5EE;
+      --surface-container-high: #E7ECE5;
+      --background: #F7FAF5;
+      --on-background: #181D18;
+      --outline: #717970;
+      --outline-variant: #C2C9BF;
+      --error: #BA1A1A;
+      --error-container: #FFDAD6;
+      --warning: #B26B00;
+      --warning-container: #FFE0B2;
+      --info: #00687A;
+      --info-container: #C2E8F5;
+
       --radius-sm: 8px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
       --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.1);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.07);
     }
 
     * {
@@ -51,108 +52,160 @@
     }
 
     body {
-      background-color: var(--md-sys-color-background);
-      color: var(--md-sys-color-on-background);
+      background-color: var(--background);
+      color: var(--on-background);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow-x: hidden;
     }
 
-    /* Header Bar */
+    /* Top Navigation Header */
     header {
-      background-color: var(--md-sys-color-surface-container);
-      padding: 16px 24px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--outline-variant);
+      padding: 12px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid var(--md-sys-color-outline-variant);
       position: sticky;
       top: 0;
       z-index: 100;
+      gap: 10px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: var(--md-sys-color-primary);
+      gap: 10px;
+      min-width: 0;
     }
 
-    .brand .logo-icon {
-      background: var(--md-sys-color-primary);
-      color: var(--md-sys-color-on-primary);
-      width: 40px;
-      height: 40px;
+    .brand-icon {
+      background: var(--primary);
+      color: var(--on-primary);
+      width: 42px;
+      height: 42px;
+      min-width: 42px;
       border-radius: var(--radius-md);
       display: grid;
       place-items: center;
+      box-shadow: 0 2px 6px rgba(0, 109, 55, 0.25);
     }
 
-    .user-badge {
+    .brand-title {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--primary);
+      letter-spacing: -0.3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-subtitle {
+      font-size: 0.72rem;
+      color: var(--secondary);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .user-info {
       display: flex;
       align-items: center;
-      gap: 12px;
-      background: var(--md-sys-color-surface);
-      padding: 6px 14px;
-      border-radius: var(--radius-full);
-      border: 1px solid var(--md-sys-color-outline-variant);
-      font-size: 0.875rem;
-      font-weight: 600;
+      gap: 8px;
     }
 
-    /* Layout Containers */
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface-container);
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid var(--outline-variant);
+      max-width: 180px;
+    }
+
+    .user-pill span#userEmailLabel {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Main Container */
     main {
       flex: 1;
-      max-width: 1000px;
+      max-width: 1040px;
       width: 100%;
       margin: 0 auto;
-      padding: 24px 16px;
+      padding: 20px 14px;
     }
 
     .hidden {
       display: none !important;
     }
 
-    /* M3 Cards */
+    /* Standard M3 Cards */
     .card {
-      background: #FFFFFF;
+      background: var(--surface);
       border-radius: var(--radius-lg);
-      padding: 28px;
-      border: 1px solid var(--md-sys-color-outline-variant);
-      box-shadow: var(--elevation-1);
-      margin-bottom: 24px;
+      padding: 20px;
+      border: 1px solid var(--outline-variant);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 20px;
     }
 
-    /* Forms & Inputs */
-    .field {
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: var(--on-background);
+    }
+
+    .card-subtitle {
+      font-size: 0.82rem;
+      color: var(--secondary);
       margin-bottom: 18px;
+      line-height: 1.4;
     }
 
-    .field label {
+    /* Forms */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
       display: block;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--md-sys-color-secondary);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--secondary);
       margin-bottom: 6px;
     }
 
-    .field input, .field select {
+    .form-control {
       width: 100%;
-      padding: 14px 16px;
+      min-height: 48px;
+      padding: 10px 14px;
       border-radius: var(--radius-sm);
-      border: 1.5px solid var(--md-sys-color-outline-variant);
-      font-size: 1rem;
+      border: 1.5px solid var(--outline-variant);
+      font-size: 0.95rem;
       outline: none;
-      transition: all 0.2s ease;
-      background: var(--md-sys-color-surface);
+      background: var(--surface);
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    .field input:focus, .field select:focus {
-      border-color: var(--md-sys-color-primary);
-      background: #FFFFFF;
+    .form-control:focus {
+      border-color: var(--primary);
       box-shadow: 0 0 0 3px rgba(0, 109, 55, 0.15);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
 
     /* Buttons */
@@ -161,360 +214,514 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 12px 24px;
-      font-size: 0.95rem;
-      font-weight: 600;
+      min-height: 46px;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      font-weight: 700;
       border-radius: var(--radius-full);
       border: none;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn:hover:not(:disabled) {
+      filter: brightness(1.05);
+    }
+
+    .btn:active:not(:disabled) {
+      transform: scale(0.97);
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
     }
 
     .btn-primary {
-      background: var(--md-sys-color-primary);
-      color: var(--md-sys-color-on-primary);
-    }
-
-    .btn-primary:hover {
-      box-shadow: var(--elevation-2);
-      filter: brightness(1.08);
+      background: var(--primary);
+      color: var(--on-primary);
     }
 
     .btn-tonal {
-      background: var(--md-sys-color-secondary-container);
-      color: var(--md-sys-color-on-secondary-container);
+      background: var(--secondary-container);
+      color: var(--on-secondary-container);
     }
 
     .btn-outline {
       background: transparent;
-      border: 1px solid var(--md-sys-color-outline);
-      color: var(--md-sys-color-on-surface);
-    }
-
-    .btn-danger {
-      background: var(--md-sys-color-error);
-      color: #fff;
+      border: 1.5px solid var(--outline);
+      color: var(--on-background);
     }
 
     .btn-block {
       width: 100%;
     }
 
-    /* Punch Clock Banner */
-    .clock-display {
-      text-align: center;
-      padding: 24px;
-      background: linear-gradient(135deg, #E7F7EC, #D3E8D3);
-      border-radius: var(--radius-lg);
-      margin-bottom: 24px;
-      border: 1px solid rgba(0, 109, 55, 0.2);
-    }
-
-    .clock-time {
-      font-family: 'Roboto Mono', monospace;
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: var(--md-sys-color-primary);
-      letter-spacing: -1px;
-    }
-
-    .clock-date {
-      font-size: 1rem;
-      color: var(--md-sys-color-secondary);
-      font-weight: 600;
-      margin-top: 4px;
-    }
-
-    .punch-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .punch-btn {
-      padding: 20px;
-      font-size: 1.1rem;
-      border-radius: var(--radius-md);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-
     /* Badges */
-    .status-badge {
+    .badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 4px 12px;
+      gap: 4px;
+      padding: 4px 10px;
       border-radius: var(--radius-full);
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 700;
+      white-space: nowrap;
     }
 
-    .badge-in {
-      background: #D7F7D9;
-      color: #0E5E28;
+    .badge-present {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
     }
 
-    .badge-out {
-      background: #FFE8E8;
-      color: #9C1414;
+    .badge-absent {
+      background: var(--error-container);
+      color: var(--error);
     }
 
-    .badge-admin {
-      background: var(--md-sys-color-primary-container);
-      color: var(--md-sys-color-on-primary-container);
+    .badge-half {
+      background: var(--warning-container);
+      color: var(--warning);
     }
 
-    /* Tables */
+    .badge-custom {
+      background: var(--info-container);
+      color: var(--info);
+    }
+
+    /* Live Clock Banner */
+    .clock-banner {
+      background: var(--surface-container);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid var(--outline-variant);
+      margin-bottom: 20px;
+      gap: 12px;
+    }
+
+    .clock-digits {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* Responsive Tables */
     .table-container {
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
       border-radius: var(--radius-md);
-      border: 1px solid var(--md-sys-color-outline-variant);
+      border: 1px solid var(--outline-variant);
+      background: var(--surface);
+      margin-top: 10px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
+      min-width: 580px;
     }
 
     th {
-      background: var(--md-sys-color-surface-container);
-      padding: 14px 16px;
+      background: var(--surface-container);
+      padding: 12px 14px;
       font-weight: 700;
-      color: var(--md-sys-color-secondary);
-      border-bottom: 1px solid var(--md-sys-color-outline-variant);
+      color: var(--secondary);
+      border-bottom: 1px solid var(--outline-variant);
+      white-space: nowrap;
     }
 
     td {
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--md-sys-color-surface-container);
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--surface-container);
+      vertical-align: middle;
     }
 
     tr:last-child td {
       border-bottom: none;
     }
 
-    /* Admin Metrics */
-    .stats-grid {
+    /* Admin Metrics Grid */
+    .metrics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
     }
 
-    .stat-card {
-      background: var(--md-sys-color-surface-container);
-      padding: 20px;
+    .metric-card {
+      background: var(--surface-container);
+      padding: 14px;
       border-radius: var(--radius-md);
-      display: flex;
-      flex-direction: column;
+      border: 1px solid var(--outline-variant);
     }
 
-    .stat-number {
-      font-size: 2rem;
+    .metric-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--secondary);
+      white-space: nowrap;
+    }
+
+    .metric-val {
+      font-size: 1.7rem;
       font-weight: 800;
-      color: var(--md-sys-color-primary);
-      margin-top: 6px;
+      color: var(--primary);
+      margin-top: 4px;
+      font-family: 'Roboto Mono', monospace;
     }
 
-    /* Alert / Toast */
-    #toast {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: #181D18;
-      color: #FFFFFF;
-      padding: 12px 24px;
-      border-radius: var(--radius-full);
-      font-size: 0.9rem;
+    /* Admin Date Filter Bar */
+    .filter-bar {
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      flex-wrap: wrap;
+    }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: #181D18;
+      color: #FFFFFF;
+      padding: 12px 20px;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.3s ease;
       z-index: 1000;
-      box-shadow: var(--elevation-3);
+      max-width: 90vw;
+      text-align: center;
     }
 
     #toast.show {
       transform: translateX(-50%) translateY(0);
     }
 
-    @media (max-width: 600px) {
-      .punch-actions {
-        grid-template-columns: 1fr;
+    /* ======================================================== */
+    /* RESPONSIVE BREAKPOINTS (Mobile & Tablets) */
+    /* ======================================================== */
+    @media (max-width: 768px) {
+      .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
-      .brand span:last-child {
+      .brand-title {
+        font-size: 1rem;
+      }
+      .brand-subtitle {
         display: none;
+      }
+    }
+
+    @media (max-width: 580px) {
+      header {
+        padding: 10px 14px;
+      }
+      .brand-icon {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+      }
+      .user-pill {
+        max-width: 120px;
+        padding: 5px 8px;
+      }
+      .card {
+        padding: 16px;
+      }
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .clock-banner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .clock-digits {
+        font-size: 1.5rem;
+      }
+      .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .filter-bar > div {
+        width: 100%;
+        margin-left: 0 !important;
+      }
+      .filter-bar input[type="date"] {
+        width: 100% !important;
+      }
+      .admin-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      .admin-actions .btn {
+        width: 100%;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- App Header -->
+  <!-- Medical App Header -->
   <header>
     <div class="brand">
-      <div class="logo-icon">
-        <span class="material-symbols-outlined">local_gas_station</span>
+      <!-- Medical Cross / Services Logo -->
+      <div class="brand-icon">
+        <span class="material-symbols-outlined" style="font-size: 24px;">medical_services</span>
       </div>
       <div>
-        <div>Life Gas System</div>
-        <div style="font-size: 0.75rem; color: var(--md-sys-color-secondary); font-weight: 500;">Attendance Portal</div>
+        <div class="brand-title">Life Gas System</div>
+        <div class="brand-subtitle">Medical Gas & Staff Portal</div>
       </div>
     </div>
-    <div id="userHeader" class="hidden">
-      <div class="user-badge">
+
+    <div id="userHeader" class="user-info hidden">
+      <div class="user-pill">
+        <span class="material-symbols-outlined" style="font-size: 16px; color: var(--primary);">health_and_safety</span>
         <span id="userEmailLabel"></span>
-        <button id="logoutBtn" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.75rem;">
-          <span class="material-symbols-outlined" style="font-size: 16px;">logout</span> Logout
-        </button>
       </div>
+      <button id="logoutBtn" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.75rem; min-height: 34px;">
+        <span class="material-symbols-outlined" style="font-size: 16px;">logout</span>
+      </button>
     </div>
   </header>
 
-  <!-- Main Container -->
   <main>
+    <!-- 1. LOGIN SECTION -->
+    <div id="authSection" class="card" style="max-width: 440px; margin: 30px auto;">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div class="brand-icon" style="margin: 0 auto 12px; width: 50px; height: 50px;">
+          <span class="material-symbols-outlined" style="font-size: 30px;">local_hospital</span>
+        </div>
+        <h2 class="card-title">Portal Login</h2>
+        <p class="card-subtitle">Life Gas System Staff & Admin Access</p>
+      </div>
 
-    <!-- SECTION 1: AUTHENTICATION -->
-    <div id="authSection" class="card" style="max-width: 440px; margin: 40px auto;">
-      <h2 style="font-size: 1.5rem; margin-bottom: 8px;">Employee Login</h2>
-      <p style="color: var(--md-sys-color-secondary); font-size: 0.9rem; margin-bottom: 24px;">Sign in with your registered Life Gas System email.</p>
-      
       <form id="loginForm">
-        <div class="field">
-          <label>Email Address</label>
-          <input type="email" id="loginEmail" placeholder="e.g. admin@lgs.co.in" required autocomplete="email" />
+        <div class="form-group">
+          <label for="loginEmail">Company Email ID</label>
+          <input type="email" id="loginEmail" class="form-control" placeholder="e.g. admin@lgs.co.in" required autocomplete="email" />
         </div>
-        <div class="field">
-          <label>Password</label>
-          <input type="password" id="loginPassword" placeholder="Enter password" required autocomplete="current-password" />
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required autocomplete="current-password" />
         </div>
-        <button type="submit" class="btn btn-primary btn-block" style="padding: 14px; font-size: 1rem; margin-top: 8px;">
-          <span class="material-symbols-outlined">lock_open</span> Sign In
+        <button type="submit" id="loginBtn" class="btn btn-primary btn-block" style="padding: 14px; margin-top: 8px;">
+          <span class="material-symbols-outlined">login</span> Sign In
         </button>
       </form>
     </div>
 
-    <!-- SECTION 2: EMPLOYEE ATTENDANCE DASHBOARD -->
-    <div id="employeeSection" class="hidden">
-      <!-- Live Clock & Status Card -->
-      <div class="card">
-        <div class="clock-display">
-          <div class="clock-time" id="liveClock">00:00:00 AM</div>
-          <div class="clock-date" id="liveDate">Loading date...</div>
+    <!-- 2. STAFF ATTENDANCE & LEAVE SECTION -->
+    <div id="staffSection" class="hidden">
+      <!-- Live Clock Banner -->
+      <div class="clock-banner">
+        <div>
+          <div style="font-size:0.75rem; font-weight:700; color:var(--secondary);">CURRENT DATE & TIME</div>
+          <div id="liveDate" style="font-weight:700; font-size: 1rem;">Loading date...</div>
         </div>
-
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-          <div>
-            <h3 style="font-size: 1.1rem; margin-bottom: 4px;">Today's Punch Status</h3>
-            <p style="color: var(--md-sys-color-secondary); font-size: 0.85rem;" id="todaySummary">Fetching data...</p>
-          </div>
-          <div id="todayStatusBadge">
-            <span class="status-badge badge-out">Not Punched In</span>
-          </div>
-        </div>
-
-        <div class="punch-actions">
-          <button id="punchInBtn" class="btn btn-primary punch-btn">
-            <span class="material-symbols-outlined" style="font-size: 32px;">login</span>
-            <span>Punch In</span>
-          </button>
-          <button id="punchOutBtn" class="btn btn-tonal punch-btn" disabled>
-            <span class="material-symbols-outlined" style="font-size: 32px;">logout</span>
-            <span>Punch Out</span>
-          </button>
-        </div>
+        <div class="clock-digits" id="liveClock">00:00:00 AM</div>
       </div>
 
-      <!-- Employee Personal Log History -->
+      <!-- Attendance Submission Form -->
       <div class="card">
-        <h3 style="font-size: 1.1rem; margin-bottom: 16px;">My Recent Attendance Log</h3>
+        <h2 class="card-title">Mark Attendance / Apply Leave</h2>
+        <p class="card-subtitle">Submit your daily presence, single/multi-day leaves, or custom hours.</p>
+
+        <form id="attendanceForm">
+          <div class="form-group">
+            <label for="attendanceType">Select Type</label>
+            <select id="attendanceType" class="form-control" style="font-weight: 700;">
+              <option value="Present">Present (Full Day Punch)</option>
+              <option value="Full Day Absent">Full Day Absent (Single or Multiple Days)</option>
+              <option value="First Half Absent">First Half Absent</option>
+              <option value="Second Half Absent">Second Half Absent</option>
+              <option value="Custom Leave">Custom Leave (Specific Hours)</option>
+            </select>
+          </div>
+
+          <!-- Dynamic: Present -->
+          <div id="presentGroup" class="form-group">
+            <label for="presentDate">Attendance Date</label>
+            <input type="date" id="presentDate" class="form-control" />
+            <div style="font-size: 0.78rem; color: var(--secondary); margin-top: 6px;">
+              Submitting records your current punch timestamp automatically.
+            </div>
+          </div>
+
+          <!-- Dynamic: Full Day Absent Range -->
+          <div id="fullAbsentGroup" class="form-group hidden">
+            <div class="form-row">
+              <div>
+                <label for="absentFromDate">From Date</label>
+                <input type="date" id="absentFromDate" class="form-control" />
+              </div>
+              <div>
+                <label for="absentToDate">To Date (Inclusive)</label>
+                <input type="date" id="absentToDate" class="form-control" />
+              </div>
+            </div>
+            <div style="font-size: 0.78rem; color: var(--secondary); margin-top: 6px;">
+              For single-day leave, pick the same date. For multi-day absence, every day in the range is logged.
+            </div>
+          </div>
+
+          <!-- Dynamic: Half Day Absent -->
+          <div id="halfAbsentGroup" class="form-group hidden">
+            <label for="halfAbsentDate">Leave Date</label>
+            <input type="date" id="halfAbsentDate" class="form-control" />
+          </div>
+
+          <!-- Dynamic: Custom Leave with Time Range -->
+          <div id="customLeaveGroup" class="form-group hidden">
+            <div class="form-group">
+              <label for="customLeaveDate">Leave Date</label>
+              <input type="date" id="customLeaveDate" class="form-control" />
+            </div>
+            <div class="form-row">
+              <div>
+                <label for="customFromTime">From Time</label>
+                <input type="time" id="customFromTime" class="form-control" value="09:00" />
+              </div>
+              <div>
+                <label for="customToTime">To Time</label>
+                <input type="time" id="customToTime" class="form-control" value="13:00" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Remarks -->
+          <div class="form-group">
+            <label for="remarkInput">Reason / Remarks (Optional)</label>
+            <input type="text" id="remarkInput" class="form-control" placeholder="e.g. Regular duty, Personal leave, Medical visit" />
+          </div>
+
+          <button type="submit" id="submitAttendanceBtn" class="btn btn-primary btn-block">
+            <span class="material-symbols-outlined">send</span> Submit Record
+          </button>
+        </form>
+      </div>
+
+      <!-- Recent Logs Table -->
+      <div class="card">
+        <h2 class="card-title">My Recent Submissions</h2>
+        <p class="card-subtitle">Scroll horizontally on mobile to view timing details.</p>
         <div class="table-container">
           <table>
             <thead>
               <tr>
                 <th>Date</th>
-                <th>Punch In</th>
-                <th>Punch Out</th>
                 <th>Status</th>
+                <th>Details</th>
+                <th>Remarks</th>
+                <th>Recorded At</th>
               </tr>
             </thead>
-            <tbody id="employeeHistoryTableBody">
-              <tr><td colspan="4" style="text-align:center;">Loading logs...</td></tr>
+            <tbody id="employeeHistoryBody">
+              <tr><td colspan="5" style="text-align:center; padding: 20px;">Loading your records...</td></tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 3: ADMIN PORTAL DASHBOARD -->
+    <!-- 3. ADMIN MASTER DASHBOARD -->
     <div id="adminSection" class="hidden">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
         <div>
-          <h2>Admin Management Portal</h2>
-          <span class="status-badge badge-admin">Master Administrator</span>
+          <h1 style="font-size: 1.4rem; font-weight: 800;">Admin Master Portal</h1>
+          <div style="font-size: 0.82rem; color: var(--secondary);">Life Gas System - Master Register</div>
         </div>
-        <div style="display: flex; gap: 8px;">
-          <button id="exportCsvBtn" class="btn btn-tonal">
-            <span class="material-symbols-outlined">download</span> Export CSV
+        <div class="admin-actions" style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button id="exportDayCsvBtn" class="btn btn-tonal" style="font-size: 0.85rem;">
+            <span class="material-symbols-outlined" style="font-size:18px;">file_download</span> Day's CSV
+          </button>
+          <button id="exportAllCsvBtn" class="btn btn-primary" style="font-size: 0.85rem;">
+            <span class="material-symbols-outlined" style="font-size:18px;">download</span> Full CSV
           </button>
         </div>
       </div>
 
-      <!-- Metrics -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <span style="font-size: 0.85rem; color: var(--md-sys-color-secondary); font-weight:600;">Date Selected</span>
-          <div class="stat-number" style="font-size: 1.25rem; font-family:'Roboto Mono';" id="adminDateLabel">-</div>
-        </div>
-        <div class="stat-card">
-          <span style="font-size: 0.85rem; color: var(--md-sys-color-secondary); font-weight:600;">Total Punched In</span>
-          <div class="stat-number" id="metricTotalPresent">0</div>
-        </div>
-        <div class="stat-card">
-          <span style="font-size: 0.85rem; color: var(--md-sys-color-secondary); font-weight:600;">Currently Active</span>
-          <div class="stat-number" id="metricActiveNow">0</div>
+      <!-- Quick Date Selector -->
+      <div class="card" style="padding: 14px; margin-bottom: 16px;">
+        <div class="filter-bar">
+          <div style="display: flex; gap: 8px;">
+            <button id="quickTodayBtn" class="btn btn-tonal" style="padding: 6px 14px; font-size: 0.82rem; min-height: 38px;">Today</button>
+            <button id="quickYesterdayBtn" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.82rem; min-height: 38px;">Yesterday</button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-left: auto;">
+            <label for="adminDateInput" style="font-size: 0.8rem; font-weight: 700; white-space: nowrap;">Date:</label>
+            <input type="date" id="adminDateInput" class="form-control" style="width: auto; min-height: 38px; padding: 6px 10px;" />
+          </div>
         </div>
       </div>
 
-      <!-- Attendance List by Date -->
-      <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
-          <h3 style="font-size: 1.1rem;">Daily Attendance Register</h3>
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <label for="adminDatePicker" style="font-size: 0.85rem; font-weight: 600;">Filter Date:</label>
-            <input type="date" id="adminDatePicker" style="padding: 6px 12px; border-radius: var(--radius-sm); border: 1px solid var(--md-sys-color-outline-variant);" />
-          </div>
+      <!-- Metrics -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-label">Total Logged</div>
+          <div class="metric-val" id="metricTotal">0</div>
         </div>
+        <div class="metric-card">
+          <div class="metric-label">Present</div>
+          <div class="metric-val" id="metricPresent" style="color: var(--primary);">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Full Absent</div>
+          <div class="metric-val" id="metricAbsent" style="color: var(--error);">0</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Half / Custom</div>
+          <div class="metric-val" id="metricLeave" style="color: var(--warning);">0</div>
+        </div>
+      </div>
+
+      <!-- Register Table -->
+      <div class="card">
+        <h2 class="card-title" id="adminTableHeading">Daily Register</h2>
+        <p class="card-subtitle">Scroll horizontally on mobile screens to inspect full logs.</p>
 
         <div class="table-container">
           <table>
             <thead>
               <tr>
-                <th>Employee Email</th>
-                <th>Punch In Time</th>
-                <th>Punch Out Time</th>
+                <th>Staff Email</th>
                 <th>Status</th>
+                <th>Detail / Hours</th>
+                <th>Reason</th>
+                <th>Submitted</th>
               </tr>
             </thead>
-            <tbody id="adminAttendanceTableBody">
-              <tr><td colspan="4" style="text-align:center;">No records found.</td></tr>
+            <tbody id="adminRegisterBody">
+              <tr><td colspan="5" style="text-align:center; padding: 20px;">Loading register...</td></tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
-
   </main>
 
-  <div id="toast"><span class="material-symbols-outlined">info</span> <span id="toastMsg"></span></div>
+  <!-- Notification Toast -->
+  <div id="toast">
+    <span class="material-symbols-outlined" style="font-size: 20px;">info</span>
+    <span id="toastMsg"></span>
+  </div>
 
-  <!-- Firebase v10 SDK via ESM -->
+  <!-- Firebase Modular SDK via ESM -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { 
@@ -528,9 +735,7 @@
       ref, 
       set, 
       get, 
-      onValue, 
-      query, 
-      orderByKey 
+      update 
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
     // 1. Firebase Config
@@ -553,7 +758,7 @@
 
     // Elements
     const authSection = document.getElementById("authSection");
-    const employeeSection = document.getElementById("employeeSection");
+    const staffSection = document.getElementById("staffSection");
     const adminSection = document.getElementById("adminSection");
     const userHeader = document.getElementById("userHeader");
     const userEmailLabel = document.getElementById("userEmailLabel");
@@ -565,27 +770,43 @@
 
     const liveClock = document.getElementById("liveClock");
     const liveDate = document.getElementById("liveDate");
-    const punchInBtn = document.getElementById("punchInBtn");
-    const punchOutBtn = document.getElementById("punchOutBtn");
-    const todayStatusBadge = document.getElementById("todayStatusBadge");
-    const todaySummary = document.getElementById("todaySummary");
-    const employeeHistoryTableBody = document.getElementById("employeeHistoryTableBody");
 
-    const adminDatePicker = document.getElementById("adminDatePicker");
-    const adminDateLabel = document.getElementById("adminDateLabel");
-    const adminAttendanceTableBody = document.getElementById("adminAttendanceTableBody");
-    const metricTotalPresent = document.getElementById("metricTotalPresent");
-    const metricActiveNow = document.getElementById("metricActiveNow");
-    const exportCsvBtn = document.getElementById("exportCsvBtn");
+    const attendanceForm = document.getElementById("attendanceForm");
+    const attendanceType = document.getElementById("attendanceType");
+    const presentGroup = document.getElementById("presentGroup");
+    const fullAbsentGroup = document.getElementById("fullAbsentGroup");
+    const halfAbsentGroup = document.getElementById("halfAbsentGroup");
+    const customLeaveGroup = document.getElementById("customLeaveGroup");
+    const presentDate = document.getElementById("presentDate");
+    const absentFromDate = document.getElementById("absentFromDate");
+    const absentToDate = document.getElementById("absentToDate");
+    const halfAbsentDate = document.getElementById("halfAbsentDate");
+    const customLeaveDate = document.getElementById("customLeaveDate");
+    const customFromTime = document.getElementById("customFromTime");
+    const customToTime = document.getElementById("customToTime");
+    const remarkInput = document.getElementById("remarkInput");
+    const employeeHistoryBody = document.getElementById("employeeHistoryBody");
+
+    const adminDateInput = document.getElementById("adminDateInput");
+    const quickTodayBtn = document.getElementById("quickTodayBtn");
+    const quickYesterdayBtn = document.getElementById("quickYesterdayBtn");
+    const adminTableHeading = document.getElementById("adminTableHeading");
+    const adminRegisterBody = document.getElementById("adminRegisterBody");
+    const metricTotal = document.getElementById("metricTotal");
+    const metricPresent = document.getElementById("metricPresent");
+    const metricAbsent = document.getElementById("metricAbsent");
+    const metricLeave = document.getElementById("metricLeave");
+    const exportDayCsvBtn = document.getElementById("exportDayCsvBtn");
+    const exportAllCsvBtn = document.getElementById("exportAllCsvBtn");
 
     let currentUser = null;
-    let cachedAdminRecords = [];
+    let currentAdminRecords = [];
 
-    // Utility: Format Date to YYYY-MM-DD
-    function getTodayKey(d = new Date()) {
-      const year = d.getFullYear();
-      const month = String(d.getMonth() + 1).padStart(2, '0');
-      const day = String(d.getDate()).padStart(2, '0');
+    // Format Date object to YYYY-MM-DD
+    function formatDateKey(dateObj) {
+      const year = dateObj.getFullYear();
+      const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const day = String(dateObj.getDate()).padStart(2, '0');
       return `${year}-${month}-${day}`;
     }
 
@@ -596,16 +817,57 @@
       setTimeout(() => toast.classList.remove("show"), 3500);
     }
 
-    // Live Clock Update
-    function updateLiveClock() {
+    // Helper: Dates between range
+    function getDatesInRange(startDateStr, endDateStr) {
+      const dates = [];
+      let curr = new Date(startDateStr);
+      const end = new Date(endDateStr);
+      if (curr > end) return [startDateStr];
+      while (curr <= end) {
+        dates.push(formatDateKey(curr));
+        curr.setDate(curr.getDate() + 1);
+      }
+      return dates;
+    }
+
+    // Live Clock
+    function updateClock() {
       const now = new Date();
       liveClock.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      liveDate.textContent = now.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
+      liveDate.textContent = now.toLocaleDateString(undefined, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
     }
-    setInterval(updateLiveClock, 1000);
-    updateLiveClock();
+    setInterval(updateClock, 1000);
+    updateClock();
 
-    // 2. Auth State Listener
+    // Default dates initialization
+    const todayStr = formatDateKey(new Date());
+    presentDate.value = todayStr;
+    absentFromDate.value = todayStr;
+    absentToDate.value = todayStr;
+    halfAbsentDate.value = todayStr;
+    customLeaveDate.value = todayStr;
+    adminDateInput.value = todayStr;
+
+    // Attendance Type Switcher
+    attendanceType.addEventListener("change", () => {
+      const val = attendanceType.value;
+      presentGroup.classList.add("hidden");
+      fullAbsentGroup.classList.add("hidden");
+      halfAbsentGroup.classList.add("hidden");
+      customLeaveGroup.classList.add("hidden");
+
+      if (val === "Present") {
+        presentGroup.classList.remove("hidden");
+      } else if (val === "Full Day Absent") {
+        fullAbsentGroup.classList.remove("hidden");
+      } else if (val === "First Half Absent" || val === "Second Half Absent") {
+        halfAbsentGroup.classList.remove("hidden");
+      } else if (val === "Custom Leave") {
+        customLeaveGroup.classList.remove("hidden");
+      }
+    });
+
+    // Auth State Changed
     onAuthStateChanged(auth, (user) => {
       currentUser = user;
       if (user) {
@@ -614,243 +876,333 @@
         authSection.classList.add("hidden");
 
         if (user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
-          // Display Admin View
           adminSection.classList.remove("hidden");
-          employeeSection.classList.add("hidden");
+          staffSection.classList.add("hidden");
           initAdminView();
         } else {
-          // Display Employee View
           adminSection.classList.add("hidden");
-          employeeSection.classList.remove("hidden");
-          initEmployeeView(user);
+          staffSection.classList.remove("hidden");
+          loadStaffHistory();
         }
       } else {
         userHeader.classList.add("hidden");
         authSection.classList.remove("hidden");
-        employeeSection.classList.add("hidden");
+        staffSection.classList.add("hidden");
         adminSection.classList.add("hidden");
       }
     });
 
-    // 3. Login Action
+    // Login
     loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const email = loginEmail.value.trim();
       const password = loginPassword.value;
       try {
         await signInWithEmailAndPassword(auth, email, password);
-        showToast("Signed in successfully!");
+        showToast("Welcome back to Life Gas System!");
       } catch (err) {
         showToast("Error: " + err.message);
       }
     });
 
-    // 4. Logout Action
+    // Logout
     logoutBtn.addEventListener("click", async () => {
       await signOut(auth);
       showToast("Signed out.");
     });
 
     // -------------------------------------------------------------
-    // EMPLOYEE DASHBOARD LOGIC
+    // STAFF SUBMISSION
     // -------------------------------------------------------------
-    function initEmployeeView(user) {
-      const todayKey = getTodayKey();
-      const userKey = user.uid;
-      const todayRef = ref(db, `attendance/${todayKey}/${userKey}`);
+    attendanceForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!currentUser) return;
 
-      // Realtime listener for today's status
-      onValue(todayRef, (snapshot) => {
-        const data = snapshot.val();
-        if (!data || !data.punchIn) {
-          todayStatusBadge.innerHTML = `<span class="status-badge badge-out">Not Punched In</span>`;
-          todaySummary.innerText = "You have not marked attendance today.";
-          punchInBtn.disabled = false;
-          punchOutBtn.disabled = true;
-        } else if (data.punchIn && !data.punchOut) {
-          todayStatusBadge.innerHTML = `<span class="status-badge badge-in">Active (Punched In)</span>`;
-          todaySummary.innerText = `Punched in at: ${data.punchIn}`;
-          punchInBtn.disabled = true;
-          punchOutBtn.disabled = false;
-        } else {
-          todayStatusBadge.innerHTML = `<span class="status-badge badge-in">Shift Completed</span>`;
-          todaySummary.innerText = `In: ${data.punchIn} | Out: ${data.punchOut}`;
-          punchInBtn.disabled = true;
-          punchOutBtn.disabled = true;
+      const type = attendanceType.value;
+      const remark = remarkInput.value.trim() || "-";
+      const submitTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      try {
+        if (type === "Present") {
+          const date = presentDate.value || todayStr;
+          const record = {
+            email: currentUser.email,
+            uid: currentUser.uid,
+            status: "Present",
+            detail: `Punch In (${submitTime})`,
+            remark: remark,
+            timestamp: Date.now(),
+            submitTime: submitTime,
+            date: date
+          };
+          await set(ref(db, `attendance/${date}/${currentUser.uid}`), record);
+        } 
+        else if (type === "Full Day Absent") {
+          const from = absentFromDate.value;
+          const to = absentToDate.value;
+          if (!from || !to) {
+            showToast("Please choose From and To dates.");
+            return;
+          }
+          const dates = getDatesInRange(from, to);
+          const updates = {};
+          dates.forEach(d => {
+            updates[`attendance/${d}/${currentUser.uid}`] = {
+              email: currentUser.email,
+              uid: currentUser.uid,
+              status: "Full Day Absent",
+              detail: dates.length > 1 ? `Leave: ${from} to ${to}` : `Full Day Leave`,
+              fromDate: from,
+              toDate: to,
+              remark: remark,
+              timestamp: Date.now(),
+              submitTime: submitTime,
+              date: d
+            };
+          });
+          await update(ref(db), updates);
         }
-      });
+        else if (type === "First Half Absent" || type === "Second Half Absent") {
+          const date = halfAbsentDate.value || todayStr;
+          const record = {
+            email: currentUser.email,
+            uid: currentUser.uid,
+            status: type,
+            detail: type === "First Half Absent" ? "First Half (Morning)" : "Second Half (Afternoon)",
+            remark: remark,
+            timestamp: Date.now(),
+            submitTime: submitTime,
+            date: date
+          };
+          await set(ref(db, `attendance/${date}/${currentUser.uid}`), record);
+        }
+        else if (type === "Custom Leave") {
+          const date = customLeaveDate.value || todayStr;
+          const fromTime = customFromTime.value;
+          const toTime = customToTime.value;
+          if (!fromTime || !toTime) {
+            showToast("Please specify From and To time.");
+            return;
+          }
+          const record = {
+            email: currentUser.email,
+            uid: currentUser.uid,
+            status: "Custom Leave",
+            detail: `${fromTime} to ${toTime}`,
+            fromTime: fromTime,
+            toTime: toTime,
+            remark: remark,
+            timestamp: Date.now(),
+            submitTime: submitTime,
+            date: date
+          };
+          await set(ref(db, `attendance/${date}/${currentUser.uid}`), record);
+        }
 
-      loadEmployeeHistory(user);
+        showToast("Record successfully submitted!");
+        remarkInput.value = "";
+        loadStaffHistory();
+      } catch (err) {
+        showToast("Error saving: " + err.message);
+      }
+    });
+
+    function getStatusBadge(status) {
+      if (status === "Present") {
+        return `<span class="badge badge-present"><span class="material-symbols-outlined" style="font-size:13px;">check_circle</span> Present</span>`;
+      } else if (status === "Full Day Absent") {
+        return `<span class="badge badge-absent"><span class="material-symbols-outlined" style="font-size:13px;">cancel</span> Absent</span>`;
+      } else if (status.includes("Half")) {
+        return `<span class="badge badge-half"><span class="material-symbols-outlined" style="font-size:13px;">schedule</span> ${status}</span>`;
+      } else {
+        return `<span class="badge badge-custom"><span class="material-symbols-outlined" style="font-size:13px;">more_time</span> Custom</span>`;
+      }
     }
 
-    // Punch In
-    punchInBtn.addEventListener("click", async () => {
+    async function loadStaffHistory() {
       if (!currentUser) return;
-      const todayKey = getTodayKey();
-      const timeStr = new Date().toLocaleTimeString();
-      const recordRef = ref(db, `attendance/${todayKey}/${currentUser.uid}`);
+      employeeHistoryBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px;">Fetching records...</td></tr>`;
 
       try {
-        await set(recordRef, {
-          email: currentUser.email,
-          uid: currentUser.uid,
-          punchIn: timeStr,
-          punchInTimestamp: Date.now(),
-          punchOut: null,
-          punchOutTimestamp: null,
-          date: todayKey
-        });
-        showToast("Punched In successfully!");
-      } catch (e) {
-        showToast("Error punching in: " + e.message);
-      }
-    });
-
-    // Punch Out
-    punchOutBtn.addEventListener("click", async () => {
-      if (!currentUser) return;
-      const todayKey = getTodayKey();
-      const timeStr = new Date().toLocaleTimeString();
-      const recordRef = ref(db, `attendance/${todayKey}/${currentUser.uid}`);
-
-      try {
-        const snap = await get(recordRef);
-        if (snap.exists()) {
-          const currentData = snap.val();
-          await set(recordRef, {
-            ...currentData,
-            punchOut: timeStr,
-            punchOutTimestamp: Date.now()
-          });
-          showToast("Punched Out successfully!");
-        }
-      } catch (e) {
-        showToast("Error punching out: " + e.message);
-      }
-    });
-
-    // Load Last 7 Days Logs for Employee
-    async function loadEmployeeHistory(user) {
-      employeeHistoryTableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">Loading records...</td></tr>`;
-      try {
-        const attendanceRef = ref(db, `attendance`);
-        const snap = await get(attendanceRef);
+        const snap = await get(ref(db, "attendance"));
         if (!snap.exists()) {
-          employeeHistoryTableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">No past records found.</td></tr>`;
+          employeeHistoryBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px;">No records yet.</td></tr>`;
           return;
         }
 
         const data = snap.val();
-        let rowsHtml = "";
-        const dates = Object.keys(data).sort().reverse().slice(0, 7); // Last 7 days
+        const userEntries = [];
 
-        dates.forEach((dateKey) => {
-          const dayRecords = data[dateKey];
-          if (dayRecords && dayRecords[user.uid]) {
-            const entry = dayRecords[user.uid];
-            rowsHtml += `
-              <tr>
-                <td><strong>${dateKey}</strong></td>
-                <td>${entry.punchIn || '-'}</td>
-                <td>${entry.punchOut || '-'}</td>
-                <td>
-                  <span class="status-badge ${entry.punchOut ? 'badge-in' : 'badge-out'}">
-                    ${entry.punchOut ? 'Completed' : 'In Progress'}
-                  </span>
-                </td>
-              </tr>
-            `;
+        Object.keys(data).forEach(dateKey => {
+          const dayEntries = data[dateKey];
+          if (dayEntries && dayEntries[currentUser.uid]) {
+            userEntries.push(dayEntries[currentUser.uid]);
           }
         });
 
-        employeeHistoryTableBody.innerHTML = rowsHtml || `<tr><td colspan="4" style="text-align:center;">No recent records.</td></tr>`;
+        if (userEntries.length === 0) {
+          employeeHistoryBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px;">No entries logged for your account.</td></tr>`;
+          return;
+        }
+
+        userEntries.sort((a, b) => (b.date > a.date ? 1 : -1));
+
+        let html = "";
+        userEntries.slice(0, 15).forEach(rec => {
+          html += `
+            <tr>
+              <td><strong>${rec.date}</strong></td>
+              <td>${getStatusBadge(rec.status)}</td>
+              <td>${rec.detail || '-'}</td>
+              <td>${rec.remark || '-'}</td>
+              <td style="color:var(--secondary); font-size:0.8rem;">${rec.submitTime || '-'}</td>
+            </tr>
+          `;
+        });
+        employeeHistoryBody.innerHTML = html;
       } catch (err) {
-        employeeHistoryTableBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color: red;">Failed to load history</td></tr>`;
+        employeeHistoryBody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:red;">Error loading: ${err.message}</td></tr>`;
       }
     }
 
     // -------------------------------------------------------------
-    // ADMIN DASHBOARD LOGIC
+    // ADMIN DASHBOARD
     // -------------------------------------------------------------
     function initAdminView() {
-      const today = getTodayKey();
-      adminDatePicker.value = today;
-      adminDateLabel.innerText = today;
-      fetchAdminAttendance(today);
+      const today = formatDateKey(new Date());
+      adminDateInput.value = today;
+      loadAdminDate(today);
 
-      adminDatePicker.addEventListener("change", (e) => {
-        const selected = e.target.value;
-        adminDateLabel.innerText = selected;
-        fetchAdminAttendance(selected);
+      quickTodayBtn.addEventListener("click", () => {
+        const d = formatDateKey(new Date());
+        adminDateInput.value = d;
+        quickTodayBtn.className = "btn btn-tonal";
+        quickYesterdayBtn.className = "btn btn-outline";
+        loadAdminDate(d);
+      });
+
+      quickYesterdayBtn.addEventListener("click", () => {
+        const y = new Date();
+        y.setDate(y.getDate() - 1);
+        const yStr = formatDateKey(y);
+        adminDateInput.value = yStr;
+        quickYesterdayBtn.className = "btn btn-tonal";
+        quickTodayBtn.className = "btn btn-outline";
+        loadAdminDate(yStr);
+      });
+
+      adminDateInput.addEventListener("change", (e) => {
+        quickTodayBtn.className = "btn btn-outline";
+        quickYesterdayBtn.className = "btn btn-outline";
+        loadAdminDate(e.target.value);
       });
     }
 
-    function fetchAdminAttendance(dateKey) {
-      const dayRef = ref(db, `attendance/${dateKey}`);
-      onValue(dayRef, (snapshot) => {
-        const data = snapshot.val();
-        cachedAdminRecords = [];
+    async function loadAdminDate(selectedDate) {
+      adminTableHeading.innerText = `Register for ${selectedDate}`;
+      adminRegisterBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px;">Loading register...</td></tr>`;
 
-        if (!data) {
-          adminAttendanceTableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">No attendance logged for this date.</td></tr>`;
-          metricTotalPresent.innerText = "0";
-          metricActiveNow.innerText = "0";
+      try {
+        const snap = await get(ref(db, `attendance/${selectedDate}`));
+        currentAdminRecords = [];
+
+        if (!snap.exists()) {
+          adminRegisterBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 20px;">No entries logged for this date.</td></tr>`;
+          metricTotal.innerText = "0";
+          metricPresent.innerText = "0";
+          metricAbsent.innerText = "0";
+          metricLeave.innerText = "0";
           return;
         }
 
-        let total = 0;
-        let active = 0;
-        let html = "";
+        const data = snap.val();
+        let countTotal = 0;
+        let countPresent = 0;
+        let countAbsent = 0;
+        let countLeave = 0;
+        let rows = "";
 
-        Object.values(data).forEach((rec) => {
-          total++;
-          if (rec.punchIn && !rec.punchOut) active++;
-          cachedAdminRecords.push(rec);
+        Object.values(data).forEach(entry => {
+          countTotal++;
+          if (entry.status === "Present") countPresent++;
+          else if (entry.status === "Full Day Absent") countAbsent++;
+          else countLeave++;
 
-          html += `
+          currentAdminRecords.push(entry);
+
+          rows += `
             <tr>
-              <td><strong>${rec.email}</strong></td>
-              <td>${rec.punchIn || '-'}</td>
-              <td>${rec.punchOut || '-'}</td>
-              <td>
-                <span class="status-badge ${rec.punchOut ? 'badge-in' : 'badge-out'}">
-                  ${rec.punchOut ? 'Punched Out' : 'Active'}
-                </span>
-              </td>
+              <td><strong>${entry.email}</strong></td>
+              <td>${getStatusBadge(entry.status)}</td>
+              <td>${entry.detail || '-'}</td>
+              <td>${entry.remark || '-'}</td>
+              <td style="color:var(--secondary); font-size:0.8rem;">${entry.submitTime || '-'}</td>
             </tr>
           `;
         });
 
-        metricTotalPresent.innerText = total;
-        metricActiveNow.innerText = active;
-        adminAttendanceTableBody.innerHTML = html;
-      });
+        metricTotal.innerText = countTotal;
+        metricPresent.innerText = countPresent;
+        metricAbsent.innerText = countAbsent;
+        metricLeave.innerText = countLeave;
+        adminRegisterBody.innerHTML = rows;
+      } catch (err) {
+        adminRegisterBody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:red;">Error: ${err.message}</td></tr>`;
+      }
     }
 
-    // CSV Exporter for Admin
-    exportCsvBtn.addEventListener("click", () => {
-      if (!cachedAdminRecords.length) {
-        showToast("No data to export.");
+    // CSV Download
+    exportDayCsvBtn.addEventListener("click", () => {
+      const selectedDate = adminDateInput.value;
+      if (!currentAdminRecords || currentAdminRecords.length === 0) {
+        showToast("No data to export for this date.");
         return;
       }
-      const dateKey = adminDatePicker.value || getTodayKey();
-      let csv = "Employee Email,Date,Punch In,Punch Out,Status\n";
 
-      cachedAdminRecords.forEach((row) => {
-        const status = row.punchOut ? "Completed" : "Active";
-        csv += `"${row.email}","${dateKey}","${row.punchIn || ''}","${row.punchOut || ''}","${status}"\n`;
+      let csv = "Email,Date,Status,Details,Remarks,Submission Time\n";
+      currentAdminRecords.forEach(r => {
+        csv += `"${r.email}","${r.date}","${r.status}","${r.detail || ''}","${r.remark || ''}","${r.submitTime || ''}"\n`;
       });
 
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      downloadCsvFile(csv, `LGS_Attendance_${selectedDate}.csv`);
+    });
+
+    exportAllCsvBtn.addEventListener("click", async () => {
+      try {
+        showToast("Exporting all records...");
+        const snap = await get(ref(db, "attendance"));
+        if (!snap.exists()) {
+          showToast("No records found in database.");
+          return;
+        }
+
+        const allData = snap.val();
+        let csv = "Email,Date,Status,Details,Remarks,Submission Time\n";
+
+        Object.keys(allData).sort().forEach(dateKey => {
+          const dayRecords = allData[dateKey];
+          Object.values(dayRecords).forEach(r => {
+            csv += `"${r.email}","${r.date}","${r.status}","${r.detail || ''}","${r.remark || ''}","${r.submitTime || ''}"\n`;
+          });
+        });
+
+        downloadCsvFile(csv, `LGS_Full_Company_Attendance.csv`);
+        showToast("Export complete!");
+      } catch (err) {
+        showToast("Export error: " + err.message);
+      }
+    });
+
+    function downloadCsvFile(csvContent, filename) {
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.setAttribute("href", url);
-      link.setAttribute("download", `LGS_Attendance_${dateKey}.csv`);
+      link.setAttribute("download", filename);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-    });
-
+    }
   </script>
 </body>
 </html>
